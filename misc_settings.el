@@ -1,6 +1,11 @@
 ;; General customizations ======================================================
 
 
+;; DC, 20140303: Disable graphical dialog boxes, they lock Emacs,
+;; since they don't respond to the button clicks.
+(if window-system
+    (setq use-dialog-box nil))
+
 ;;(column-number-mode t) ;show column nbr
 (global-font-lock-mode t) ;apply syntax highlighting to all buffers
 
@@ -27,11 +32,11 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
-;; read in DYLD_LIBRARY_PATH from .bash_profile in GUI mode
-(if window-system ;(not (getenv "TERM_PROGRAM"))
-    (setenv "DYLD_LIBRARY_PATH"
-	    (shell-command-to-string 
-	     "source $HOME/.bash_profile && printf $DYLD_LIBRARY_PATH")))
+;; Read in DYLD_LIBRARY_PATH from .bash_profile in GUI mode. Why?
+;; (if window-system ;(not (getenv "TERM_PROGRAM"))
+;;     (setenv "DYLD_LIBRARY_PATH"
+;; 	    (shell-command-to-string 
+;; 	     "source $HOME/.bash_profile && printf $DYLD_LIBRARY_PATH")))
 
 ;; TODO: is this still necessary? We use Melpa now.
 ;; set load-path to ~/.emacs.d/lisp and all subdirectories
@@ -48,11 +53,6 @@
 
 ;; indentation
 (setq c-basic-offset 4)
-
-;; TODO: what's this for?
-(setq safe-local-variable-values
-      '((Package . COMMON-LISP-USER)
-	(Package . metabang\.graph)))
 
 ;; ;; Look ========================================================================
 
@@ -158,6 +158,7 @@
 
 ;; Auto-saves ==================================================================
 
+;; All backups go into 1 directory. Which one?
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms

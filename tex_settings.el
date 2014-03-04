@@ -7,6 +7,8 @@
 
 (eval-after-load "tex" ;; TODO: put as much commands as possible in here.
   '(progn
+     ;; (require 'auctex-latexmk)
+     ;; (auctex-latexmk-setup)
      (add-hook 'LaTeX-mode-hook 'visual-line-mode)
      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
      (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
@@ -19,7 +21,7 @@
      ;; In-Emacs preview
      (setq preview-preserve-counters t)
      ;; Synchronization between Emacs and PDF viewer
-     (setq TeX-source-correlate-method (quote synctex))
+     (setq TeX-source-correlate-method 'synctex)
      (setq TeX-source-correlate-mode t)
      (setq TeX-source-correlate-start-server t)
      ;; RefTex
@@ -27,11 +29,11 @@
      (setq reftex-plug-into-AUCTeX t)
      (setq reftex-cite-format 'natbib)
      (setq reftex-default-bibliography
-	   '("/Users/davidcatteeuw/Subversion/Papers/dcatteeu/library"))
+	   '("/Users/dcatteeu/Papers/library"))
      ;; Viewers
      (setq TeX-view-program-list
 	   '(("Preview" "open %o")
-	     ("Skim" "skim -r %n %o %b")))
+	     ("Skim" "/Applications/Skim.app/Contents/SharedSupport/displayline %n %o %b")))
      (setq TeX-view-program-selection
 	   '(((output-dvi style-pstricks) "dvips and gv")
 	     (output-dvi "Skim")
@@ -96,6 +98,9 @@
 	      :help "Run an arbitrary command")
 	     ("Glossary" "makeglossaries %s" TeX-run-command nil (latex-mode)
 	      :help "Create glossaries")
-	     ("Mk" "latexmk -pdflatex=\"%`%l%(mode)\" %s" TeX-run-command
-	      nil (latex-mode)
-	      :help "Auto run all necessary processing by means of latexmk")))))
+	     ;; DC, 20140303: installed auctex-latexmk to add the
+	     ;; command automatically.  
+	     ("Mk" "latexmk -pdflatex=\"%`%l%(mode)\" %s"
+	      TeX-run-command nil (latex-mode) 
+	      :help "Auto run all necessary processing by means
+	      of latexmk") ))))
