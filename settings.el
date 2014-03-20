@@ -11,6 +11,7 @@
 
 ;;;; Programming language modes
 
+(load "~/.emacs.d/text_settings.el")
 (load "~/.emacs.d/lisp_settings.el")
 (load "~/.emacs.d/java_settings.el")
 ;(load "~/.emacs.d/settings_prolog.el")

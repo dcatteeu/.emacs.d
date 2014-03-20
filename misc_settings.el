@@ -28,11 +28,14 @@
 (package-initialize)
 
 ;; Set default path from shell
-(require 'exec-path-from-shell)
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
+;; DC, 20140320: no longer needed, I set the path through launchdctl.
+;(require 'exec-path-from-shell)
+;(when (memq window-system '(mac ns))
+;  (exec-path-from-shell-initialize))
 
-;; Read in DYLD_LIBRARY_PATH from .bash_profile in GUI mode. Why?
+;; Read in DYLD_LIBRARY_PATH from .bash_profile in GUI mode.
+;; DC, 20140320: only do this when lisp mode is loaded, otherwise may
+;; intervene with latex-skim-forward-search.
 ;; (if window-system ;(not (getenv "TERM_PROGRAM"))
 ;;     (setenv "DYLD_LIBRARY_PATH"
 ;; 	    (shell-command-to-string 
@@ -114,7 +117,12 @@
 
 ;; Startup =====================================================================
 
-(setq inhibit-startup-screen t)
+(setq inhibit-startup-screen t) ;Hide startup-screen. 
+
+;; Open and show bookmark list.
+;(bookmark-bmenu-list)
+;(switch-to-buffer "*Bookmark List*")
+
 (setq initial-scratch-message ";; S H O R T - C U T S
 
 ;; transpose char             C-t
@@ -158,8 +166,6 @@
 
 ;; Auto-saves ==================================================================
 
-;; All backups go into 1 directory. Which one?
+;; All backups go into 1 directory.
 (setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+      `(("." . "~/.emacs.d/backups")))
