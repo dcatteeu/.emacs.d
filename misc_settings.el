@@ -120,8 +120,8 @@
 (setq inhibit-startup-screen t) ;Hide startup-screen. 
 
 ;; Open and show bookmark list.
-;(bookmark-bmenu-list)
-;(switch-to-buffer "*Bookmark List*")
+(bookmark-bmenu-list)
+(switch-to-buffer "*Bookmark List*")
 
 (setq initial-scratch-message ";; S H O R T - C U T S
 

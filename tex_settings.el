@@ -4,21 +4,48 @@
 (setq-default TeX-PDF-mode t)
 (setq-default TeX-master nil)
 (setq latex-run-command "pdflatex")
-(setq tex-shell-file-name nil)
+;(setq tex-shell-file-name nil)
+
+(defun drc-auctex-latex ()
+  (interactive)
+  (save-buffer)
+  (TeX-command "LaTeX" 'TeX-master-file 0))
+
+(defun drc-auctex-bibtex ()
+  (interactive)
+  (TeX-command "BibTex" 'TeX-master-file 0))
+
+(defun drc-auctex-mk ()
+  (interactive)
+  (save-buffer)
+  (TeX-command "Mk" 'TeX-master-file 0))
+
+(defun drc-auctex-view ()
+  (interactive)
+  (TeX-command "View" 'TeX-master-file 0))
+
+(defun drc-auctex-clean ()
+  (interactive)
+  (TeX-command "Clean" 'TeX-master-file))
+
+(defun drc-LaTeX-mode-keys ()
+  "Modify keymaps used by `LaTeX-mode'."
+  (local-set-key (kbd "<f5>") 'drc-auctex-latex)
+  (local-set-key (kbd "<f6>") 'drc-auctex-bibtex)
+  (local-set-key (kbd "<f7>") 'drc-auctex-mk)
+  (local-set-key (kbd "<f8>") 'drc-auctex-view)
+  (local-set-key (kbd "<f9>") 'drc-auctex-clean))
 
 (eval-after-load "tex"
   '(progn
+     (add-hook 'LaTeX-mode-hook 'drc-LaTeX-mode-keys)
      (add-hook 'LaTeX-mode-hook 'visual-line-mode)
      (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
      (add-hook 'LaTeX-mode-hook 'linum-mode)
      (setq TeX-auto-save t)
-     (setq TeX-parse-self t)
-     (setq TeX-clean-confirm nil)
+     ;(setq TeX-parse-self t)
      (setq TeX-show-compilation t)
      (setq LaTeX-command "latex")
-     ;; In-Emacs preview
-     (setq preview-preserve-counters t)
      ;; Synchronization between Emacs and PDF viewer
      (setq TeX-source-correlate-method 'synctex)
      (setq TeX-source-correlate-mode t)
@@ -28,7 +55,7 @@
      (setq reftex-plug-into-AUCTeX t)
      (setq reftex-cite-format 'natbib)
      (setq reftex-default-bibliography
-	   '("/Users/dcatteeu/Papers/library"))
+	   '("/Users/dcatteeu/Research/Papers/library"))
      ;; Extra Auctex commands: Mk, Glossary, and View which now uses
      ;; skim.
      (add-to-list 'TeX-command-list
