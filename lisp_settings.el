@@ -10,13 +10,14 @@
 (eval-after-load "lisp"
   '(add-hook 'lisp-mode-hook
 	     (lambda ()
-	       (setq fill-column 90)
+	       (setq fill-column 90 
+		     slime-autodoc-use-multiline-p t)
 	       ;; kill whitespace greedily 
 	       (c-toggle-hungry-state 1) 
 	       ;; special chars trigger indentation
 	       (c-toggle-electric-state 1)
 	       ;; So that gsll can find libgslcblas.dylb in
 	       ;; /usr/local/lib/.  Make sure this is only done when
-	       ;; in lisp mode. It has been made Latex->Skim forward
-	       ;; search impossible before.
-	       (setenv "DYLD_LIBRARY_PATH" "/usr/local/lib:")))) 
+	       ;; in lisp mode. It has made Latex->Skim forward search
+	       ;; impossible before.
+	       (setenv "DYLD_LIBRARY_PATH" "/usr/local/lib:"))))
