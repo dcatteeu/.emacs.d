@@ -16,8 +16,7 @@
 	       (c-toggle-hungry-state 1) 
 	       ;; special chars trigger indentation
 	       (c-toggle-electric-state 1)
-	       ;; So that gsll can find libgslcblas.dylb in
-	       ;; /usr/local/lib/.  Make sure this is only done when
-	       ;; in lisp mode. It has made Latex->Skim forward search
-	       ;; impossible before.
-	       (setenv "DYLD_LIBRARY_PATH" "/usr/local/lib:"))))
+	       ;; So that dash-at-point lookup is refined to Common
+	       ;; Lisp docset.
+	       (add-to-list 'dash-at-point-mode-alist
+			    '(lisp-mode . "lisp")))))
