@@ -36,6 +36,9 @@
   (local-set-key (kbd "<f8>") 'drc-auctex-view)
   (local-set-key (kbd "<f9>") 'drc-auctex-clean))
 
+;; (defun drc-reftex-format-cref (label format reftex-refstyle)
+;;   (format "\\Cref{%s}" label))
+
 (eval-after-load "tex"
   '(progn
      (add-hook 'LaTeX-mode-hook 'drc-LaTeX-mode-keys)
@@ -56,6 +59,23 @@
      (setq reftex-cite-format 'natbib)
      (setq reftex-default-bibliography
 	   '("/Users/dcatteeu/Research/Papers/library"))
+     ;; (TeX-add-style-hook "cleveref"
+     ;; 			 (lambda ()
+     ;; 			   (if (boundp 'reftex-ref-style-alist)
+     ;; 			       (add-to-list
+     ;; 				'reftex-ref-style-alist
+     ;; 				'("Cleveref" "cleveref"
+     ;; 				  (("\\cref" ?c) ("\\Cref" ?C)
+     ;; 				   ("\\cpageref" ?d) ("\\Cpageref" ?D)))))
+     ;; 			   (add-to-list 'reftex-ref-style-default-list
+     ;; 					"Cleveref")
+     ;; 			   (TeX-add-symbols
+     ;; 			    '("cref" TeX-arg-ref)
+     ;; 			    '("Cref" TeX-arg-ref)
+     ;; 			    '("cpageref" TeX-arg-ref)
+     ;; 			    '("Cpageref" TeX-arg-ref))))
+     ;; (add-to-list 'reftex-ref-style-alist ;Add cleverefs to reftex.
+     ;; 		  '("Cleveref" "cleveref" (("\\cref" ?c) ("\\Cref" ?C))))
      ;; Extra Auctex commands: Mk, Glossary, and View which now uses
      ;; skim.
      (add-to-list 'TeX-command-list
@@ -67,7 +87,26 @@
      (add-to-list 'TeX-command-list
 		  '("Mk" "latexmk -pdflatex=\"%`%l%(mode)\" %s"
 		    TeX-run-command nil (latex-mode) 
-		    :help "Auto run all necessary processing by means of latexmk"))
+		    :help "Auto run all necessary processing by
+		    means of latexmk"))
      (add-to-list 'TeX-view-program-list
 		  '("skim" "/Applications/Skim.app/Contents/SharedSupport/displayline -o %n %o %b"))
      (setq TeX-view-program-selection '((output-pdf "skim")))))
+
+
+;; (eval-after-load
+;;     "latex"
+;;   '(TeX-add-style-hook
+;;     "cleveref"
+;;     (lambda ()
+;;       (if (boundp 'reftex-ref-style-alist)
+;;       (add-to-list
+;;        'reftex-ref-style-alist
+;;        '("Cleveref" "cleveref"
+;;          (("\\cref" ?c) ("\\Cref" ?C) ("\\cpageref" ?d) ("\\Cpageref" ?D)))))
+;;       (add-to-list 'reftex-ref-style-default-list "Cleveref")
+;;       (TeX-add-symbols
+;;        '("cref" TeX-arg-ref)
+;;        '("Cref" TeX-arg-ref)
+;;        '("cpageref" TeX-arg-ref)
+;;        '("Cpageref" TeX-arg-ref)))))

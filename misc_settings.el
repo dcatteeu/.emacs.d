@@ -18,6 +18,15 @@
 (show-paren-mode 1) ;show matching parentheses
 (delete-selection-mode 1) ;delete selected text when inserting
 
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
+(defun unfill-paragraph ()
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+;; Handy key definition
+(define-key global-map "\M-Q" 'unfill-paragraph)
+
 ;; Use the new way to list buffers.
 (defalias 'list-buffers 'ibuffer)
 
@@ -163,6 +172,9 @@
 
 ;;                            forward   backward
 ;; incremental search         C-s       C-r")
+
+;; toggle mark                C-space
+;; back to mark               C-u C-space
 
 ;; Auto-saves ==================================================================
 
