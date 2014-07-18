@@ -1,5 +1,5 @@
-(require 'malabar-mode)
-(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
+;(require 'malabar-mode)
+;(add-to-list 'auto-mode-alist '("\\.java\\'" . malabar-mode))
 
 (eval-after-load "java"
   '(add-hook 'java-mode-hook 
