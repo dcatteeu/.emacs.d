@@ -138,9 +138,19 @@
 ;; transpose word             M-t
 ;; transpose line             C-x C-t
 
-;;                            next    previous
-;; matching parenthesis       C-M-n   C-M-p
+;;                            begin     end
+;; line                       C-a       C-e
+;; paragraph                  M-a       M-e
+;; word                       M-b       M-f
+;; buffer                     M-<       M->
 
+;;                            previous  next
+;; line                       C-p       C-n
+;; page                       M-v       C-v
+;; matching parenthesis       C-M-p     C-M-n
+
+;; toggle mark                C-space
+;; back to mark               C-u C-space
 ;; goto-line                  M-g g
 ;; cancel command             C-g
 
@@ -160,21 +170,9 @@
 ;; save buffer as             C-x C-w
 ;; exit                       C-x C-c
 
-;;                            begin     end
-;; line                       C-a       C-e
-;; paragraph                  M-a       M-e
-;; word                       M-b       M-f
-;; buffer                     M-<       M->
-
-;;                            up        down
-;; line                       C-p       C-n
-;; page                       M-v       C-v
-
 ;;                            forward   backward
-;; incremental search         C-s       C-r")
-
-;; toggle mark                C-space
-;; back to mark               C-u C-space
+;; incremental search         C-s       C-r
+")
 
 ;; Auto-saves ==================================================================
 

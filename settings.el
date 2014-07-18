@@ -9,20 +9,23 @@
 ;(load "~/.emacs.d/settings_spelling.el")
 
 
-;;;; Programming language modes
+
+;;;; Text editing modes
 
 (load "~/.emacs.d/text_settings.el")
+(load "~/.emacs.d/org_settings.el")
+(load "~/.emacs.d/tex_settings.el")
+
+
+
+;;;; Programming language modes
+
 (load "~/.emacs.d/lisp_settings.el")
 (load "~/.emacs.d/java_settings.el")
 ;(load "~/.emacs.d/settings_prolog.el")
 ;(load "~/.emacs.d/settings_python.el")
 ;(load "~/.emacs.d/settings_clojure.el")
 
-
-;;;; Other modes
-
-(load "~/.emacs.d/org_settings.el")
-(load "~/.emacs.d/tex_settings.el")
 
 
 ;;;; Custom

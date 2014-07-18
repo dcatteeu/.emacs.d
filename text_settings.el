@@ -1,4 +1,1 @@
-(eval-after-load "text"
-  '(add-hook 'text-mode-hook 
-	     (lambda ()
-	       (setq word-wrap t))))
+(add-hook 'text-mode-hook 'visual-line-mode)

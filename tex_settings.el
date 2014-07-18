@@ -1,5 +1,10 @@
 ;;;; Tex mode
 
+(defun drc-default-bibtex ()
+  (cdr (assoc system-type
+	      '(("darwin" . ("/Users/dcatteeu/Research/Papers/library"))
+		("gnu/linux" . ())
+		("windowns-nt" . ())))))
 
 (setq-default TeX-PDF-mode t)
 (setq-default TeX-master nil)
@@ -57,8 +62,7 @@
      (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
      (setq reftex-plug-into-AUCTeX t)
      (setq reftex-cite-format 'natbib)
-     (setq reftex-default-bibliography
-	   '("/Users/dcatteeu/Research/Papers/library"))
+     (setq reftex-default-bibliography 'drc-default-bibtex)
      ;; (TeX-add-style-hook "cleveref"
      ;; 			 (lambda ()
      ;; 			   (if (boundp 'reftex-ref-style-alist)
