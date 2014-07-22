@@ -1,22 +1,30 @@
 ;; General customizations ======================================================
 
-
-;; DC, 20140303: Disable graphical dialog boxes, they lock Emacs,
-;; since they don't respond to the button clicks.
 (if window-system
-    (setq use-dialog-box nil))
-
-;;(column-number-mode t) ;show column nbr
-(global-font-lock-mode t) ;apply syntax highlighting to all buffers
-
-(if window-system
-    (progn (scroll-bar-mode -1) ;turn off scroll bar
-	   (tool-bar-mode -1) ;turn off tool bar
-	   (global-linum-mode t)) ;turn on line nbrs
+    (progn ;; DC, 20140303: Disable graphical dialog boxes, they lock
+	   ;; Emacs, since they don't respond to the button clicks.
+      (setq use-dialog-box nil)
+      ;; Turn off scroll and tool bar.
+      (scroll-bar-mode -1)
+      (tool-bar-mode -1)
+      ;; Turn on line nbrs
+      (global-linum-mode t))
   (menu-bar-mode -1)) ;turn off menu bar in text mode
+;; Show column nbr.
+(column-number-mode t)
 
-(show-paren-mode 1) ;show matching parentheses
-(delete-selection-mode 1) ;delete selected text when inserting
+;; Delete selected text when inserting.
+(delete-selection-mode 1)
+
+;; default on (global-font-lock-mode t) ;apply syntax highlighting to all buffers
+
+;; Word wrap, line-move and kill-line visual, no wrap indicator in the
+;; fringes.
+(global-visual-line-mode 1) 
+
+;; Highlight entire expression between matching parentheses.
+(show-paren-mode 1) 
+(setq show-paren-style 'expression)
 
 ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
 (defun unfill-paragraph ()
@@ -35,26 +43,6 @@
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
-
-;; Set default path from shell
-;; DC, 20140320: no longer needed, I set the path through launchdctl.
-;(require 'exec-path-from-shell)
-;(when (memq window-system '(mac ns))
-;  (exec-path-from-shell-initialize))
-
-;; Read in DYLD_LIBRARY_PATH from .bash_profile in GUI mode.
-;; DC, 20140320: only do this when lisp mode is loaded, otherwise may
-;; intervene with latex-skim-forward-search.
-;; (if window-system ;(not (getenv "TERM_PROGRAM"))
-;;     (setenv "DYLD_LIBRARY_PATH"
-;; 	    (shell-command-to-string 
-;; 	     "source $HOME/.bash_profile && printf $DYLD_LIBRARY_PATH")))
-
-;; TODO: is this still necessary? We use Melpa now.
-;; set load-path to ~/.emacs.d/lisp and all subdirectories
-;;(let ((default-directory "~/.emacs.d/lisp/"))
-;;  (normal-top-level-add-to-load-path '("."))
-;;  (normal-top-level-add-subdirs-to-load-path))
 
 ;(load "~/.emacs.d/my-graphene.el")
 
@@ -128,50 +116,82 @@
 
 (setq inhibit-startup-screen t) ;Hide startup-screen. 
 
-;; Open and show bookmark list.
-(bookmark-bmenu-list)
-(switch-to-buffer "*Bookmark List*")
+;; Keep track of recently opened files and list them.
+(recentf-mode 1)
+(recentf-open-files)
 
-(setq initial-scratch-message ";; S H O R T - C U T S
+;; ;; Open and show bookmark list.
+;; (bookmark-bmenu-list)
+;; (switch-to-buffer "*Bookmark List*")
 
-;; transpose char             C-t
-;; transpose word             M-t
-;; transpose line             C-x C-t
+(setq initial-scratch-message 
+";;;; VARIOUS
 
-;;                            begin     end
-;; line                       C-a       C-e
+;;                            char      word     line                
+;; transpose                  C-t       M-t      C-x C-t
+
+
+;;;; FIND/REPLACE
+            
+;; find forward               C-s       
+;;      backward              C-r
+;; find & replace             M-%
+;;     with regex             C-M-%
+;;     in dired               Q
+
+
+;;;; MOVE CURSOR
+
+;;                            begin     end      previous  next
+;; line                       C-a       C-e      C-p       C-n
 ;; paragraph                  M-a       M-e
 ;; word                       M-b       M-f
 ;; buffer                     M-<       M->
+;; page                                          M-v       C-v
 
-;;                            previous  next
-;; line                       C-p       C-n
-;; page                       M-v       C-v
-;; matching parenthesis       C-M-p     C-M-n
-
-;; toggle mark                C-space
 ;; back to mark               C-u C-space
 ;; goto-line                  M-g g
-;; cancel command             C-g
 
-;; mark                       M-SPC or C-SPC
+
+
+;;;; S-EXPRESSIONS
+
+;;                                 sibling
+;;                            previous  next       parent    child
+;; sexp                       C-M-left  C-M-right  C-M-up    C-M-down
+;; list (sexps wo atoms)      C-M-p     C-M-n
+;;
+;; select till end of sexp    C-M-space
+
+
+;;;; MARK, COPY, PASTE
+
+;; toggle mark                C-space or M-space
 ;; kill region                C-w
 ;; kill to end of line        C-k
 ;; copy region                M-w
 ;; paste                      C-y and M-y for previous
 
+
+;;;; CANCEL, UNDO
+
+;; cancel                     C-g
 ;; undo                       C-_
 
-;; open file in buffer        C-x b
+
+;;;; FILE, BUFFER (C-x)
+
+;; open file in buffer        C-x f
 ;; open other file in buffer  C-x C-v
+;; switch to buffer           C-x b
+
+;; dired                      C-x d
 ;; list buffers               C-x C-b
+
 ;; close buffer               C-x k
 ;; save buffer                C-x C-s
 ;; save buffer as             C-x C-w
 ;; exit                       C-x C-c
-
-;;                            forward   backward
-;; incremental search         C-s       C-r
 ")
 
 ;; Auto-saves ==================================================================
