@@ -15,6 +15,7 @@
 (load "~/.emacs.d/text_settings.el")
 (load "~/.emacs.d/org_settings.el")
 (load "~/.emacs.d/tex_settings.el")
+(load "~/.emacs.d/md_settings.el")
 
 
 

@@ -1,5 +1,21 @@
 ;; General customizations ======================================================
 
+;; Use command as M, use alt as C. This puts M next to space as on
+;; other keyboards and creates to C keys instead of only one on the
+;; Mac book pro keyboard.
+;(setq mac-command-modifier 'meta)
+;(setq mac-option-modifier 'control)
+
+;; Redefine some hard to type keybindings.
+(global-set-key (kbd "M-2") 'beginning-of-buffer) ; M-<
+(global-set-key (kbd "M-3") 'end-of-buffer) ; M->
+(global-set-key (kbd "M-5") 'query-replace) ; M-%
+(global-set-key (kbd "C-M-5") 'query-replace-regexp) ; C-M-%
+(defun drc-flyspell-mode-keys ()
+  "My keybindings for `flyspell-mode'."
+  (define-key flyspell-mode-map (kbd "M-4") 'ispell-word)) ; M-$
+(add-hook 'flyspell-mode-hook 'drc-flyspell-mode-keys)
+
 (if window-system
     (progn ;; DC, 20140303: Disable graphical dialog boxes, they lock
 	   ;; Emacs, since they don't respond to the button clicks.
@@ -10,20 +26,19 @@
       ;; Turn on line nbrs
       (global-linum-mode t))
   (menu-bar-mode -1)) ;turn off menu bar in text mode
+
 ;; Show column nbr.
 (column-number-mode t)
 
 ;; Delete selected text when inserting.
 (delete-selection-mode 1)
 
-;; default on (global-font-lock-mode t) ;apply syntax highlighting to all buffers
-
 ;; Word wrap, line-move and kill-line visual, no wrap indicator in the
 ;; fringes.
 (global-visual-line-mode 1) 
 
 ;; Highlight entire expression between matching parentheses.
-(show-paren-mode 1) 
+(show-paren-mode 1)
 (setq show-paren-style 'expression)
 
 ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
@@ -144,7 +159,8 @@
 
 ;;                            begin     end      previous  next
 ;; line                       C-a       C-e      C-p       C-n
-;; paragraph                  M-a       M-e
+;; character                                     C-b       C-f
+;; sentence                   M-a       M-e
 ;; word                       M-b       M-f
 ;; buffer                     M-<       M->
 ;; page                                          M-v       C-v
@@ -167,16 +183,20 @@
 ;;;; MARK, COPY, PASTE
 
 ;; toggle mark                C-space or M-space
-;; kill region                C-w
-;; kill to end of line        C-k
 ;; copy region                M-w
 ;; paste                      C-y and M-y for previous
+;; kill 
+;;      region                C-w
+;;      to end of line        C-k
+;;      to end of sentence    M-k
+;;      char left/right       backspace / C-d
+;;      word left/right       M-backspace / M-d
 
 
 ;;;; CANCEL, UNDO
 
 ;; cancel                     C-g
-;; undo                       C-_
+;; undo                       C-/ (also C-_ or C-x u)
 
 
 ;;;; FILE, BUFFER (C-x)
@@ -189,9 +209,18 @@
 ;; list buffers               C-x C-b
 
 ;; close buffer               C-x k
+;; save interactively         C-x s
 ;; save buffer                C-x C-s
 ;; save buffer as             C-x C-w
 ;; exit                       C-x C-c
+
+
+;;;; HELP (C-h)
+
+;; apropos                    C-h a
+;; function                   C-h f
+;; key-binding (full)         C-h c (C-h k)
+;; info                       C-h i
 ")
 
 ;; Auto-saves ==================================================================
