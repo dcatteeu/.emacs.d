@@ -1,4 +1,4 @@
-(add-to-list 'auto-mode-alist '("\\.lisp$" . lisp-mode))
+(add-to-list 'auto-mode-alist '("\\.lisp\\'" . lisp-mode))
 
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 

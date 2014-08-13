@@ -1,11 +1,5 @@
 ;; General customizations ======================================================
 
-;; Use command as M, use alt as C. This puts M next to space as on
-;; other keyboards and creates to C keys instead of only one on the
-;; Mac book pro keyboard.
-;(setq mac-command-modifier 'meta)
-;(setq mac-option-modifier 'control)
-
 ;; Redefine some hard to type keybindings.
 (global-set-key (kbd "M-2") 'beginning-of-buffer) ; M-<
 (global-set-key (kbd "M-3") 'end-of-buffer) ; M->
