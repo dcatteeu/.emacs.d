@@ -1,4 +1,4 @@
-;; General customizations ======================================================
+;;;; General customizations
 
 ;; Redefine some hard to type keybindings.
 (global-set-key (kbd "M-2") 'beginning-of-buffer) ; M-<
@@ -29,7 +29,7 @@
 
 ;; Word wrap, line-move and kill-line visual, no wrap indicator in the
 ;; fringes.
-(global-visual-line-mode 1) 
+(global-visual-line-mode 1)
 
 ;; Highlight entire expression between matching parentheses.
 (show-paren-mode 1)
@@ -63,7 +63,9 @@
 ;; indentation
 (setq c-basic-offset 4)
 
-;; ;; Look ========================================================================
+
+
+;;;; Look
 
 ;; ;; Set fonts before loading theme.
 
@@ -92,7 +94,15 @@
 
 
 
-;; Autocompletion ==============================================================
+;;;; Auto-saves
+
+;; All backups go into 1 directory.
+(setq backup-directory-alist
+      `(("." . "~/.emacs.d/backups")))
+
+
+
+;;;; Autocompletion
 
 ;; Use Smex for recent M-x commands a la ido.
 (require 'smex)
@@ -121,11 +131,12 @@
 
 
 
-;; Startup =====================================================================
+;;;; Startup
 
 (setq inhibit-startup-screen t) ;Hide startup-screen. 
 
 ;; Keep track of recently opened files and list them.
+;; TODO: Only list them if there is at least one, otherwise you'll get an error.
 (recentf-mode 1)
 (recentf-open-files)
 
@@ -216,9 +227,3 @@
 ;; key-binding (full)         C-h c (C-h k)
 ;; info                       C-h i
 ")
-
-;; Auto-saves ==================================================================
-
-;; All backups go into 1 directory.
-(setq backup-directory-alist
-      `(("." . "~/.emacs.d/backups")))

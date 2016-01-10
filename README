@@ -1,1 +1,5 @@
-Put (load "~/.emacs.d/settings.el") in your ~/.emacs.
+1. When in `~`, clone this repository to create `~/.emacs.d/`
+2. Install Emacs
+3. Install smex
+4. Put `(load "~/.emacs.d/settings.el")` in your `~/.emacs`.
+5. Run Emacs
