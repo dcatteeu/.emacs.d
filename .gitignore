@@ -1,5 +1,9 @@
+*~
 auto-save-list
 backups
 bookmarks
 elpa
 srecode-map.el
+ido.last
+recentf
+smex-items
